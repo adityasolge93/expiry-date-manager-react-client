@@ -16,8 +16,10 @@ const Login = () => {
     try {
       // Typically, this points to process.env.VITE_API_URL or similar.
       // Assuming server runs on standard port or relative path in production
-      const response = await fetch('http://localhost:5001/auth/login', {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

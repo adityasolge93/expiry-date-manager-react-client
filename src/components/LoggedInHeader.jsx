@@ -7,8 +7,10 @@ const LoggedInHeader = () => {
   const handleLogout = async () => {
     try {
       // Call the backend logout API to clear the httpOnly cookie
-      await fetch('http://localhost:5001/auth/logout', {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      await fetch(`${API_BASE_URL}/auth/logout`, {
         method: 'POST',
+        credentials: 'include',
       });
     } catch (error) {
       console.error('Logout API call failed:', error);

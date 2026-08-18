@@ -31,7 +31,9 @@ const Dashboard = () => {
       if (search) queryParams.append('search', search);
       if (expiresIn) queryParams.append('expiresIn', expiresIn);
 
-      const response = await fetch(`http://localhost:5001/products?${queryParams}`, {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_BASE_URL}/products?${queryParams}`, {
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -79,8 +81,10 @@ const Dashboard = () => {
     
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/products/${productToDelete._id}`, {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_BASE_URL}/products/${productToDelete._id}`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
           'Authorization': `Bearer ${token}`
         }

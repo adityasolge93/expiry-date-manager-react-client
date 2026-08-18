@@ -51,8 +51,10 @@ const AddProduct = () => {
         expiryDate: new Date(formData.expiryDate).toISOString()
       };
 
-      const response = await fetch('http://localhost:5001/products', {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
+      const response = await fetch(`${API_BASE_URL}/products`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
